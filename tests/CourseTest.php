@@ -17,9 +17,10 @@ class CourseTest extends PHPUnit_Framework_TestCase
     {
         Course::deleteAll();
     }
-    function testGetName()
+
+    function testGetCourseName()
     {
-        $course_course_name = "History of Civilization";
+        $course_name = "History of Civilization";
         $course_number = "HIS301";
         $id = 1;
         $test_course = new Course($course_name, $course_number, $id);
@@ -29,7 +30,7 @@ class CourseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($course_name, $result);
     }
 
-    function testSetName()
+    function testSetCourseName()
     {
         $course_name = "Introduction to Robotics";
         $course_number = "CS321";
@@ -63,10 +64,10 @@ class CourseTest extends PHPUnit_Framework_TestCase
         $test_course = new Course($course_name, $course_number, $id);
         $new_course_number = "MUS102";
 
-        $test_course->setCourseNumber($new_course_name);
+        $test_course->setCourseNumber($new_course_number);
         $result = $test_course->getCourseNumber();
 
-        $this->assertEquals($new_course_name, $result);
+        $this->assertEquals($new_course_number, $result);
     }
 
     function testGetId()
@@ -152,7 +153,7 @@ class CourseTest extends PHPUnit_Framework_TestCase
 
         $test_course->updateCourseName($course_name_2);
 
-        $this->assertEquals($course_name_2, $test_course->geCoursetName());
+        $this->assertEquals($course_name_2, $test_course->getCourseName());
     }
 
     function testUpdateCourseNumber()
