@@ -16,7 +16,7 @@
 
         {% if courses is not empty %}
             {% for course in courses %}
-                <h4>Course Name: <a href="#">{{ course.getCourseName }}</a></h4>
+                <h4>Course Name: <a href="/course/{{ course.getId }}">{{ course.getCourseName }}</a></h4>
                 <p>Course Number: {{ course.getCourseNumber }}</p>
             {% endfor %}
         {% endif %}
