@@ -186,6 +186,20 @@ class CourseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals([$test_course_2], Course::getAll());
     }
 
+    function testEnrollStudent()
+    {
+        $course_name = "Energy-Efficient Design";
+        $course_number = "ENV301";
+        $id = 40;
+        $test_course = new Course($course_name, $course_number, $id);
+        $student_id = 4;
+
+        $executed = $test_course->enrollStudent($student_id);
+
+        $this->assertTrue($executed, "Student not successfully associated in database");
+    }
+
+
 }
 
 ?>

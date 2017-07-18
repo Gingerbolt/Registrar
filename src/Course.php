@@ -115,5 +115,33 @@
                return true;
            }
       }
+
+      function getStudentsByCourse()
+        {
+            $returned_students = $GLOBALS['DB']->query("SELECT students.* FROM students
+                JOIN enrollment ON (students.id = enrollment.student_id)
+                JOIN courses ON (enrollment.course_id = courses.id)
+                WHERE courses.id = {$this->getId()};");
+            $enrolled_students = array();
+            foreach($returned_students as $student) {
+                $name = $student['name'];
+                $enrollment_date = $student['enrollment_date'];
+                $id = $student['id'];
+                $new_student = new Student($name, $enrollment_date, $id);
+                array_push($enrolled_students, $new_student);
+            }
+            return $enrolled_students;
+        }
+
+        function enrollStudent($student_id)
+        {
+            $executed = $GLOBALS['DB']->exec("INSERT INTO enrollment (course_id, student_id) VALUES ('{$this->getId()}', '{$student_id}');");
+            if ($executed) {
+                $this->id= $GLOBALS['DB']->lastInsertId();
+                return true;
+            } else {
+                return false;
+            }
+        }
   }
 ?>

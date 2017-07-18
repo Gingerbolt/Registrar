@@ -185,6 +185,19 @@ class StudentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals([$test_student_2], Student::getAll());
     }
 
+    function testEnrollInCourse()
+    {
+        $name = "Amelia";
+        $enrollment_date = "2011-11-11";
+        $id = 13;
+        $test_student = new Student($name, $enrollment_date, $id);
+        $course_id = 66;
+
+        $executed = $test_student->enrollInCourse($course_id);
+
+        $this->assertTrue($executed, "Course not successfully associated in database");
+    }
+
 }
 
 ?>

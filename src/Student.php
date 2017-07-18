@@ -115,5 +115,16 @@
                return true;
            }
       }
+
+      function enrollInCourse($course_id)
+      {
+          $executed = $GLOBALS['DB']->exec("INSERT INTO enrollment (student_id, course_id) VALUES ('{$this->getId()}', '{$course_id}');");
+          if ($executed) {
+              $this->id= $GLOBALS['DB']->lastInsertId();
+              return true;
+          } else {
+              return false;
+          }
+      }
   }
 ?>
