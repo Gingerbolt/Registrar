@@ -46,5 +46,15 @@
         return $app['twig']->render('courses.html.twig', array('courses' => Course::getAll()));
     });
 
+    $app->get("/course/{id}", function($id) use ($app) {
+        return $app['twig']->render('course.html.twig', array('enrolled_students' => Course::findStudentsByCourse($id), 'course' => Course::find($id)));
+    });
+
+    $app->post("/course/{id}", function($id) use ($app) {
+        $enrolled_student_id = $_POST['enrolled_student'];
+        // save $enrolled_student_id to course id in database
+        return $app['twig']->render('course.html.twig', array('enrolled_students' => Course::findStudentsByCourse($id), 'course' => Course::find($id)));
+    });
+
     return $app;
 ?>
