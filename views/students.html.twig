@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Epicodus University Registrar | Students</title>
+    </head>
+    <body>
+        <h1>Epicodus University Registrar | Students</h1>
+        <form action="/students" name="students" method="post">
+            <label for="name">Enter A Student Name: </label>
+            <input type="text" name="name" required>
+
+            <label for="enrollment_date">Enrollment Date: </label>
+            <input type="date" name="enrollment_date" required>
+
+            <button type="submit" name="students">Add Student</button>
+        </form>
+
+        {% if students is not empty %}
+            {% for student in students %}
+                <h4>Student: <a href="#">{{ student.getName }}</a></h4>
+                <p>Enrollment Date: {{ student.getEnrollmentDate }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <h4><a href="/">Home</a></h4>
+    </body>
+</html>
