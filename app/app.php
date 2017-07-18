@@ -47,14 +47,21 @@
     });
 
     $app->get("/course/{id}", function($id) use ($app) {
-        return $app['twig']->render('course.html.twig', array('enrolled_students' => Course::findStudentsByCourse($id), 'course' => Course::find($id)));
+        $course = Course::find($id);
+        return $app['twig']->render('course.html.twig', array('all_students' => Student::getAll(), 'enrolled_students' => $course->getStudentsByCourse(), 'course' => $course, 'course_id' => $id));
     });
 
     $app->post("/course/{id}", function($id) use ($app) {
-        $enrolled_student_id = $_POST['enrolled_student'];
-        // save $enrolled_student_id to course id in database
-        return $app['twig']->render('course.html.twig', array('enrolled_students' => Course::findStudentsByCourse($id), 'course' => Course::find($id)));
+        if(isset($_POST['student_select_form']))
+        {
+            $enrolled_student_id = $_POST['student_select'];
+        }
+        $course = Course::find($id);
+        $course->enrollStudent($enrolled_student_id);
+        return $app['twig']->render('course.html.twig', array('enrolled_students' => $course->getStudentsByCourse(), 'course' => $course,'all_students' => Student::getAll(), 'course_id' => $id));
     });
+
+    $app->post("/student_add_success", function() use ($app)){}
 
     return $app;
 ?>

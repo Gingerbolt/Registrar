@@ -7,14 +7,16 @@
 
         <h2>Course Name: {{ course.getCourseNumber }} - {{ course.getCourseName }}</h2>
         <h4>Enroll Student: </h4>
-        <form action="/course/{{ course.getId }}" method="post">
-            <select name="enrolled_student">
-                {% for student in enrolled_students %}
-                    <option value="{{ student.getId }}">{{ student.getName }}</option>
+        <form action="/course/{{ course_id }}" name="student_select_form" method="post">
+            <!-- <input name="_method" type="hidden" value="patch"> -->
+
+            <select name="student_select">
+                {% for student in all_students %}
+                    <option value='{{ student.getId }}'>{{ student.getName }}</option>
                 {% endfor %}
             </select>
 
-            <button type="submit" name="enrolled_student"></button>
+            <button type="submit" name="student_select_form">Enroll</button>
         </form>
 
         <h2>Students Enrolled in {{ course.getCourseNumber }} - {{ course.getCourseName }}:</h2>

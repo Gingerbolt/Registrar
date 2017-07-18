@@ -133,9 +133,9 @@
             return $enrolled_students;
         }
 
-        function enrollStudent($student_id)
+        function enrollStudent($student)
         {
-            $executed = $GLOBALS['DB']->exec("INSERT INTO enrollment (course_id, student_id) VALUES ('{$this->getId()}', '{$student_id}');");
+            $executed = $GLOBALS['DB']->exec("INSERT INTO enrollment (course_id, student_id) VALUES ('{$this->getId()}', '{$student}');");
             if ($executed) {
                 $this->id= $GLOBALS['DB']->lastInsertId();
                 return true;
