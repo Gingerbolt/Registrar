@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Epicodus University Registrar | Course Enrollment</title>
+    </head>
+    <body>
+        <h1>Epicodus University Registrar | Course Enrollment</h1>
+
+        <h2>Course Name: {{ course.getCourseNumber }} - {{ course.getCourseName }}</h2>
+        <h4>Enroll Student: </h4>
+        <form action="/course/{{ course.getId }}" method="post">
+            <select name="enrolled_student">
+                {% for student in enrolled_students %}
+                    <option value="{{ student.getId }}">{{ student.getName }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit" name="enrolled_student"></button>
+        </form>
+
+        <h2>Students Enrolled in {{ course.getCourseNumber }} - {{ course.getCourseName }}:</h2>
+        {% for student in enrolled_students %}
+            <p>{{ student.getName }}</p>
+        {% endfor %}
+    </body>
+</html>
